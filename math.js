@@ -31,6 +31,24 @@ function calculateTriangle(side1, side2, base, height) {
   };
 }
 
+function calculateIscoscelesTriangleHeight(side, base) {
+  if (side == base) {
+    console.warn("It is not an iscosceles triangle");
+  } else {
+    return Math.sqrt(side ** 2 - base ** 2 / 4);
+  }
+}
+
+function calculateScaleneHeight(lado1, lado2, lado3) {
+  if (lado1 == lado2 || lado1 == lado3 || lado2 == lado3) {
+    return false;
+  }
+
+  const x = (lado2 ** 2 + lado1 ** 2 - lado3 ** 2) / (2 * lado1);
+
+  return Math.sqrt(lado2 ** 2 - x ** 2);
+}
+
 console.group("Triangle");
 console.log({
   triangleSide1,
@@ -67,3 +85,11 @@ function calculateCircle(radius) {
   };
 }
 console.groupEnd("Circle");
+
+console.group("Funtions");
+console.log(calculateCircle(3))
+console.log(calculateIscoscelesTriangleHeight(6, 4))
+console.log(calculateScaleneHeight(16, 8, 10))
+console.log(calculateSquare(4))
+console.log(calculateTriangle(3, 4, 5, 5.5))
+console.groupEnd("Functions");
