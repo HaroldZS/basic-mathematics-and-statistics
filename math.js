@@ -41,3 +41,29 @@ console.log({
   triangleArea,
 });
 console.groupEnd("Triangle");
+
+const circleRadius = 3;
+const circleDiameter = circleRadius * 2;
+const PI = 3.1415;
+const circumference = circleDiameter * PI;
+const cirleArea = circleRadius ** 2 * PI;
+
+console.log({
+  circleRadius,
+  circleDiameter,
+  PI,
+  circumference,
+  cirleArea,
+});
+
+console.group("Circle");
+function calculateCircle(radius) {
+  const diameter = radius * 2;
+  const squareRadius = Math.pow(radius, 2);
+
+  return {
+    circumference: diameter * Math.PI,
+    area: squareRadius * Math.PI,
+  };
+}
+console.groupEnd("Circle");
