@@ -7,7 +7,9 @@ const median = (list) => {
   }
 };
 
-console.log(median([1, 2, 3, 4, 5]));
-console.log(
-  median([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18])
-);
+const sortList = (list) => {
+  return list.sort((a, b) => a - b);
+};
+
+console.log(median(sortList([3, 2, 1, 5, 4])));
+console.log(median(sortList([10, 20, 1000, 30])));
