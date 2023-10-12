@@ -11,7 +11,30 @@ const discounts = {
   Gift: 100,
 };
 
-const calculateCoupon = () => {
+const couponList = [
+  {
+    name: "Regular",
+    discount: 6,
+  },
+  {
+    name: "Birthday",
+    discount: 40,
+  },
+  {
+    name: "Christmas",
+    discount: 50,
+  },
+  {
+    name: "Expert",
+    discount: 80,
+  },
+  {
+    name: "Gift",
+    discount: 100,
+  },
+];
+
+const calculateCouponObj = () => {
   const price = Number(inputPrice.value);
   const coupon = inputCoupon.value;
   const discount = discounts[coupon];
@@ -30,4 +53,26 @@ const calculateCoupon = () => {
   pResult.innerHTML = `New price with the coupon discount: ${newPrice}$`;
 };
 
-btn.addEventListener("click", calculateCoupon);
+const calculateCouponObjArr = () => {
+  const objArrPrice = Number(inputPrice.value);
+  const objArrCoupon = inputCoupon.value;
+  const objArrDiscount = couponList.find(
+    (coupon) => coupon.name === objArrCoupon
+  );
+
+  if (!objArrPrice || !objArrCoupon) {
+    pResult.innerHTML = "Inputs are required";
+    return;
+  }
+
+  if (!objArrDiscount) {
+    pResult.innerHTML = "Invalid coupon";
+    return;
+  }
+
+  const newObjArrPrice = (objArrPrice * (100 - objArrDiscount.discount)) / 100;
+  pResult.innerHTML = `New price with the coupon discount: ${newObjArrPrice}$`;
+};
+
+// btn.addEventListener("click", calculateCouponObj);
+btn.addEventListener("click", calculateCouponObjArr);
