@@ -5,8 +5,8 @@ const pResult = document.querySelector("#result");
 btn.addEventListener("click", calculateDiscount);
 
 function calculateDiscount() {
-  const price = inputPrice.value;
-  const discount = inputDiscount.value;
+  const price = Number(inputPrice.value);
+  const discount = Number(inputDiscount.value);
 
   if (!price || !discount) {
     pResult.innerHTML = "Inputs are required";
