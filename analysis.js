@@ -1,16 +1,6 @@
 const wages = require("./wages");
 const StatisticTools = require("./statisticsTools");
 
-function findPerson(searchPerson) {
-  return wages.find((person) => person.name === searchPerson);
-}
-
-function findSalaryList(personName) {
-  const jobs = findPerson(personName).jobs;
-  const salaryList = jobs.map((item) => item.salary);
-  return salaryList;
-}
-
 function personAverageAnalysis(personName) {
   return StatisticTools.average(findSalaryList(personName));
 }
@@ -23,6 +13,33 @@ function personModeAnalysis(personName) {
   return StatisticTools.mode(findSalaryList(personName));
 }
 
+function personSalaryProjection(personName) {
+  const personSalary = findSalaryList(personName);
+  const growthPercentages = calculateSalaryGrowthList(personSalary);
+  const medianSalaryPercentage = StatisticTools.median(growthPercentages);
+  const lastSalary = personSalary[personSalary.length - 1];
+  return lastSalary + lastSalary * medianSalaryPercentage;
+}
+
+function findPerson(searchPerson) {
+  return wages.find((person) => person.name === searchPerson);
+}
+
+function findSalaryList(personName) {
+  const jobs = findPerson(personName).jobs;
+  const salaryList = jobs.map((item) => item.salary);
+  return salaryList;
+}
+
+function calculateSalaryGrowthList(list) {
+  return list
+    .map((salary, index, array) => {
+      return (salary - array[index - 1]) / salary;
+    })
+    .slice(1);
+}
+
 console.log(personAverageAnalysis("Juanita"));
 console.log(personMedianAnalysis("Juanita"));
 console.log(personModeAnalysis("Juanita"));
+console.log(personSalaryProjection("Juanita"));
