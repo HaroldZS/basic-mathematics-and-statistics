@@ -39,7 +39,26 @@ function calculateSalaryGrowthList(list) {
     .slice(1);
 }
 
+const companies = {};
+
+wages.forEach((person) => {
+  person.jobs.forEach((record) => {
+    let { company, year, salary } = record;
+
+    if (!companies[company]) {
+      companies[company] = {};
+    }
+
+    if (!companies[company][year]) {
+      companies[company][year] = [];
+    }
+
+    companies[company][year].push(salary);
+  });
+});
+
 console.log(personAverageAnalysis("Juanita"));
 console.log(personMedianAnalysis("Juanita"));
 console.log(personModeAnalysis("Juanita"));
 console.log(personSalaryProjection("Juanita"));
+console.log(companies);
