@@ -15,8 +15,8 @@ function personModeAnalysis(personName) {
 
 function personSalaryProjection(personName) {
   const personSalary = findSalaryList(personName);
-  const growthPercentages = calculateSalaryGrowthList(personSalary);
-  const medianSalaryPercentage = StatisticTools.median(growthPercentages);
+  const salaryGrowthPercentages = calculateGrowthList(personSalary);
+  const medianSalaryPercentage = StatisticTools.median(salaryGrowthPercentages);
   const lastSalary = personSalary[personSalary.length - 1];
   return lastSalary + lastSalary * medianSalaryPercentage;
 }
@@ -31,10 +31,10 @@ function findSalaryList(personName) {
   return salaryList;
 }
 
-function calculateSalaryGrowthList(list) {
+function calculateGrowthList(list) {
   return list
-    .map((salary, index, array) => {
-      return (salary - array[index - 1]) / salary;
+    .map((value, index, array) => {
+      return (value - array[index - 1]) / value;
     })
     .slice(1);
 }
@@ -69,9 +69,27 @@ function companyMedianSalaryPerYear(company, year) {
   return StatisticTools.median(companies[company][year]);
 }
 
+function companySalaryProjection(name) {
+  if (!companies[name]) {
+    console.warn("Invalid company name");
+  } else {
+    const years = Object.keys(companies[name]);
+    const mediansPerYear = years.map((year) =>
+      StatisticTools.median(companies[name][year])
+    );
+    const medianGrowthPercentages = StatisticTools.median(
+      calculateGrowthList(mediansPerYear)
+    );
+    const lastMedian = mediansPerYear[mediansPerYear.length - 1];
+    return lastMedian + lastMedian * medianGrowthPercentages;
+  }
+}
+
 console.log(personAverageAnalysis("Juanita"));
 console.log(personMedianAnalysis("Juanita"));
 console.log(personModeAnalysis("Juanita"));
 console.log(personSalaryProjection("Juanita"));
 console.log(companies);
 console.log(companyMedianSalaryPerYear("Wayne Enterprises", 2018));
+console.log(companySalaryProjection("Wayne Enterprises"));
+console.log(companies["Wayne Enterprises"]);

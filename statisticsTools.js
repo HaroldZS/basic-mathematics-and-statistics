@@ -6,6 +6,7 @@ const average = (list) => {
 
 const median = (list) => {
   let index = Math.round(list.length / 2) - 1;
+  list = sortList(list);
   if (list.length % 2) {
     return list[index];
   } else {
