@@ -57,8 +57,21 @@ wages.forEach((person) => {
   });
 });
 
+function companyMedianSalaryPerYear(company, year) {
+  if (!companies[company]) {
+    console.warn("Invalid company name");
+    return;
+  }
+  if (!companies[company][year]) {
+    console.warn("Invalid year per company");
+    return;
+  }
+  return StatisticTools.median(companies[company][year]);
+}
+
 console.log(personAverageAnalysis("Juanita"));
 console.log(personMedianAnalysis("Juanita"));
 console.log(personModeAnalysis("Juanita"));
 console.log(personSalaryProjection("Juanita"));
 console.log(companies);
+console.log(companyMedianSalaryPerYear("Wayne Enterprises", 2018));
