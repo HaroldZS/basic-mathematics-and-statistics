@@ -85,6 +85,24 @@ function companySalaryProjection(name) {
   }
 }
 
+function findMedianList(list) {
+  return list.map(({ name }) => personMedianAnalysis(name));
+}
+
+function generalMedian() {
+  const medianList = findMedianList(wages);
+  return StatisticTools.median(medianList);
+}
+
+function top10Median() {
+  const medianList = findMedianList(wages);
+  const sortedMedians = StatisticTools.sort(medianList);
+  const quantity = sortedMedians.length / 10;
+  const limit = sortedMedians.length - quantity;
+  const top10 = sortedMedians.slice(limit);
+  return StatisticTools.median(top10);
+}
+
 console.log(personAverageAnalysis("Juanita"));
 console.log(personMedianAnalysis("Juanita"));
 console.log(personModeAnalysis("Juanita"));
@@ -93,3 +111,5 @@ console.log(companies);
 console.log(companyMedianSalaryPerYear("Wayne Enterprises", 2018));
 console.log(companySalaryProjection("Wayne Enterprises"));
 console.log(companies["Wayne Enterprises"]);
+console.log(generalMedian());
+console.log(top10Median());
